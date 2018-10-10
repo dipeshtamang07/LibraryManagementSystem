@@ -12,22 +12,22 @@ import java.sql.SQLException;
 public class PersonController {
     public String name;
     public String email;
-    public String phno;
+    public String ph_no;
     
-    public PersonController(String name, String email,String phno){
+    public PersonController(String name, String email,String ph_no){
         this.name = name;
         this.email = email;
-        this.phno = phno;
+        this.ph_no = ph_no;
         System.out.println("HELLO");
     }
     
     public void insertPerson(Connection con) throws SQLException{
-        String sql = "insert into book values(null,?,?,?);";
+        String sql = "insert into person values(null,?,?,?);";
            
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setString(1, this.name);
         ps.setString(2, this.email);
-        ps.setString(3, this.phno);
+        ps.setString(3, this.ph_no);
         ps.executeUpdate();
         ps.close();           
         
