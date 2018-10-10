@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package library;
+package Database;
 import java.sql.*;
 
 
@@ -12,11 +12,11 @@ public class Database {
 
     Connection con;
     String password = "";
-    String uri = "jdbc:mysql://localhost:3306/Book";
+    String uri = "jdbc:mysql://localhost:3306/library";
     String user = "root";
     
     public Connection openConnection() throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
+        Class.forName("com.mysql.jdbc.Driver");
         con = DriverManager.getConnection(uri, user, password);
         return con;
     }
