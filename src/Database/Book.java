@@ -1,19 +1,20 @@
 
-package Controller;
+package Database;
 
+import Controller.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 
-public class BookController {
+public class Book {
     
     public String name;
     public String isbn;
     public String auth;
     public String pubG;
     
-    public BookController(String name, String isbn, String auth, String pubG){
+    public Book(String name, String isbn, String auth, String pubG){
         this.name = name;
         this.isbn = isbn;
         this.auth = auth;

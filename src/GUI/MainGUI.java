@@ -1,4 +1,4 @@
-package library;
+package GUI;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -6,7 +6,7 @@ package library;
  * and open the template in the editor.
  */
 import Controller.BookController;
-import Controller.PersonController;
+import Database.PersonController;
 import Database.Database;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -27,7 +27,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-public class Library_Application extends Application {
+public class MainGUI extends Application {
 
     public static void main(String[] args) {
         Application.launch(args);
@@ -164,9 +164,9 @@ public class Library_Application extends Application {
                 } 
                 
                 catch (ClassNotFoundException ex) {
-                    Logger.getLogger(Library_Application.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (SQLException ex) {
-                    Logger.getLogger(Library_Application.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
                 }
     }
             }); 
@@ -194,9 +194,9 @@ public class Library_Application extends Application {
                     
                     
                 } catch (SQLException ex) {
-                    Logger.getLogger(Library_Application.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(Library_Application.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
