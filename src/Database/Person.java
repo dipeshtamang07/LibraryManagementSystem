@@ -9,12 +9,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class PersonController {
+public class Person {
     public String name;
     public String email;
     public String ph_no;
     
-    public PersonController(String name, String email,String ph_no){
+    public Person(String name, String email,String ph_no){
         this.name = name;
         this.email = email;
         this.ph_no = ph_no;

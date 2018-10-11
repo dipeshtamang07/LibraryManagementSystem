@@ -5,8 +5,8 @@ package GUI;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import Controller.BookController;
-import Database.PersonController;
+import Database.Book;
+import Database.Person;
 import Database.Database;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -157,7 +157,7 @@ public class MainGUI extends Application {
                     
                     Database d = new Database();
                     Connection con = d.openConnection();     
-                    BookController b = new BookController(book_name,ISBN,author,publisher);
+                    Book b = new Book(book_name,ISBN,author,publisher);
                     b.insertBook(con);                    
                     con.close();
                     
@@ -188,7 +188,7 @@ public class MainGUI extends Application {
                     
                     Database d = new Database();
                     Connection con = d.openConnection();     
-                    PersonController b = new PersonController(name,email,ph_no);
+                    Person b = new Person(name,email,ph_no);
                     b.insertPerson(con);                    
                     con.close();
                     
