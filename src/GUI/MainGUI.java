@@ -5,11 +5,12 @@ package GUI;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import java.sql.SQLException;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class MainGUI extends Application {
@@ -19,7 +20,7 @@ public class MainGUI extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws ClassNotFoundException, SQLException {
 
         //FORMS
         BookForm1 bookForm = new BookForm1();
@@ -32,6 +33,7 @@ public class MainGUI extends Application {
         Tab tab1 = new Tab();
         tab1.setText("      Book        ");
 
+        
         Tab tab2 = new Tab();
         tab2.setText("      Person        ");
 
@@ -40,20 +42,19 @@ public class MainGUI extends Application {
 
         Tab tab4 = new Tab();
         tab4.setText("      Return        ");
-
+        
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 
-        //GridPanes
-        GridPane bookGP = bookForm.getGp1();
-        GridPane personGP = personForm.getGp2();
-        GridPane borrowGP = borrowForm.getGp3();
-        GridPane returnGP = returnForm.getGp4();
+        //Hbox
+        HBox hBox1 = bookForm.gethBox1();
+        
+        HBox hBox3 = borrowForm.gethBox3();
 
         //Tab Contents
-        tab1.setContent(bookGP);
-        tab2.setContent(personGP);
-        tab3.setContent(borrowGP);
-        tab4.setContent(returnGP);
+        tab1.setContent(hBox1);
+        //tab2.setContent(personGP);
+        tab3.setContent(hBox3);
+        //tab4.setContent(returnGP);
 
         tabPane.getTabs().add(tab1);
         tabPane.getTabs().add(tab2);

@@ -4,9 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/dipesh/Desktop/Library/src/GUI/MainGUI.java</file>
+            <file>file:/home/dipesh/Desktop/Library/src/Database/ReturnBook.java</file>
+            <file>file:/home/dipesh/Desktop/Library/src/Database/Person.java</file>
+            <file>file:/home/dipesh/Desktop/Library/src/Database/BorrowBook.java</file>
             <file>file:/home/dipesh/Desktop/Library/src/Database/Book.java</file>
             <file>file:/home/dipesh/Desktop/Library/src/GUI/BookForm1.java</file>
-            <file>file:/home/dipesh/Desktop/Library/src/GUI/BookForm.java</file>
+            <file>file:/home/dipesh/Desktop/Library/src/Database/Database.java</file>
+            <file>file:/home/dipesh/Desktop/Library/src/GUI/BorrowForm.java</file>
         </group>
     </open-files>
 </project-private>

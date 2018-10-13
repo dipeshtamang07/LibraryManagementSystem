@@ -7,7 +7,10 @@ package Database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -30,6 +33,35 @@ public class BorrowBook {
         ps.setInt(2, this.b_id);
         ps.executeUpdate();
         ps.close();      
+    }
+    
+    public static ObservableList<BorrowBook> getAllBorrows(Connection con) throws SQLException {
+
+        ObservableList<BorrowBook> borrowArray = FXCollections.observableArrayList();
+
+        String sql = "select * from borrow;";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            int id = rs.getInt(1);
+            int book_id = rs.getInt(2);
+            int person_id = rs.getInt(3);
+            BorrowBook bb = new BorrowBook(book_id,person_id);
+
+            borrowArray.add(bb);
+
+        }
+        rs.close();
+        ps.close();
+        return borrowArray;
+    }
+
+    public int getP_id() {
+        return p_id;
+    }
+
+    public int getB_id() {
+        return b_id;
     }
     
     
