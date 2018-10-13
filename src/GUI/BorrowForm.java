@@ -5,18 +5,25 @@
  */
 package GUI;
 
+import Database.Book;
 import Database.BorrowBook;
 import Database.Database;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 
 /**
  *
@@ -35,8 +42,10 @@ public class BorrowForm {
     Button btnBorrow;
 
     GridPane gp3;
+    
+    HBox hBox3;
 
-    public BorrowForm() {
+    public BorrowForm() throws ClassNotFoundException, SQLException {
         lTitle = new Label("ADD BORROW");
         lBId = new Label("Book ID");
         lPId = new Label("Person ID");
@@ -58,6 +67,26 @@ public class BorrowForm {
         gp3.add(tfPId, 1, 2);
         gp3.add(btnBorrow, 1, 3);
         
+        //TableView
+        TableView t = new TableView();
+        Database d = new Database();
+        Connection con = d.openConnection();
+        ObservableList<BorrowBook> borrowArray = BorrowBook.getAllBorrows(con);
+        
+        TableColumn<Integer, BorrowBook> tPId = new TableColumn("Person ID");
+        tPId.setCellValueFactory(new PropertyValueFactory("p_id"));
+
+
+        TableColumn<Integer, BorrowBook> tBId = new TableColumn("Book ID");
+        tBId.setCellValueFactory(new PropertyValueFactory("b_id"));
+
+        
+        t.setItems(borrowArray);
+        t.getColumns().addAll(tPId,tBId);
+        t.setPrefSize(300, 300);
+        
+        hBox3 = new HBox(gp3,t);
+        
 
         btnBorrow.setOnAction((ActionEvent e) -> {
             String bkID = tfBId.getText();
@@ -68,20 +97,24 @@ public class BorrowForm {
             System.out.println(bookID);
             System.out.println(personID);
             
-            Database d = new Database();
+            Database d1 = new Database();
             BorrowBook bb = new BorrowBook(bookID, personID);
             try {
-                bb.insertBorrowBook(d.openConnection());
+                bb.insertBorrowBook(d1.openConnection());
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(BorrowForm.class.getName()).log(Level.SEVERE, null, ex);
             }
             try {
-                d.closeConnection();
+                d1.closeConnection();
             } catch (SQLException ex) {
                 Logger.getLogger(BorrowForm.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
 
+    }
+
+    public HBox gethBox3() {
+        return hBox3;
     }
 
     public Label getlTitle() {

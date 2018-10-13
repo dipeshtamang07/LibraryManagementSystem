@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -33,17 +35,38 @@ public class BorrowBook {
         ps.close();      
     }
     
-    public void DisplayBorrow(Connection con ) throws SQLException{
-        String sql = "select * from borrow;";
         
+
+    public static ObservableList<BorrowBook> getAllBorrows(Connection con) throws SQLException {
+
+        ObservableList<BorrowBook> borrowArray = FXCollections.observableArrayList();
+
+        String sql = "select * from borrow;";
         PreparedStatement ps = con.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
-        while(rs.next()){
-            System.out.println(rs.getInt(1));
-            System.out.println(rs.getInt(2));
+        while (rs.next()) {
+            int p_id = rs.getInt(2);
+            int b_id = rs.getInt(3);
+            BorrowBook bb = new BorrowBook(p_id,b_id);
+
+            borrowArray.add(bb);
+
         }
-    
+        rs.close();
+        ps.close();
+        return borrowArray;
+    }
+
+    public int getP_id() {
+        return p_id;
+    }
+
+    public int getB_id() {
+        return b_id;
     }
     
+
     
+    
+       
 }

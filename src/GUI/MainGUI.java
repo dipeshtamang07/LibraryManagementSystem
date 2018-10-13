@@ -10,7 +10,9 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.layout.GridPane;
+
+
+
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -34,6 +36,7 @@ public class MainGUI extends Application {
         Tab tab1 = new Tab();
         tab1.setText("      Book        ");
 
+        
         Tab tab2 = new Tab();
         tab2.setText("      Person        ");
 
@@ -42,17 +45,29 @@ public class MainGUI extends Application {
 
         Tab tab4 = new Tab();
         tab4.setText("      Return        ");
-
+        
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 
-        HBox hbox1 = personForm.getHbox1();
-        
+        HBox hBox1 = bookForm.gethBox1();
+        HBox hbox2 = personForm.getHbox2();
+        HBox hBox3 = borrowForm.gethBox3();
         HBox hbox4 = returnForm.getHbox4();
+        
+        
+        
 
         //Tab Contents
-        tab1.setContent(hbox1);
-        //tab2.setContent(personGP);
-        //tab3.setContent(borrowGP);
+        tab1.setContent(hBox1);
+        tab2.setContent(hbox2);
+        tab3.setContent(hBox3);
+        tab4.setContent(hbox4);
+        //Hbox
+        
+
+        //Tab Contents
+        tab1.setContent(hBox1);
+        tab2.setContent(hbox2);
+        tab3.setContent(hBox3);
         tab4.setContent(hbox4);
 
         tabPane.getTabs().add(tab1);

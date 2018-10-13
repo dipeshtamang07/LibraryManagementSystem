@@ -44,7 +44,7 @@ public class PersonForm1 {
 
     GridPane gp2;
     
-    HBox hbox1; 
+    HBox hbox2; 
 
     public PersonForm1() throws ClassNotFoundException, SQLException {
 
@@ -98,7 +98,7 @@ public class PersonForm1 {
         t.getColumns().addAll(tname,temail,tph_no);
         
         
-        hbox1 = new HBox(gp2,t);
+        hbox2 = new HBox(gp2,t);
 
         btnPerson.setOnAction((ActionEvent event) -> {
             String name = tfPName.getText();
@@ -168,8 +168,8 @@ public class PersonForm1 {
         return gp2;
     }
 
-    public HBox getHbox1() {
-        return hbox1;
+    public HBox getHbox2() {
+        return hbox2;
     }
     
 
