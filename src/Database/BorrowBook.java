@@ -7,6 +7,7 @@ package Database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -32,8 +33,17 @@ public class BorrowBook {
         ps.close();      
     }
     
+    public void DisplayBorrow(Connection con ) throws SQLException{
+        String sql = "select * from borrow;";
+        
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        while(rs.next()){
+            System.out.println(rs.getInt(1));
+            System.out.println(rs.getInt(2));
+        }
     
-    
+    }
     
     
 }

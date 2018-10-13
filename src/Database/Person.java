@@ -7,7 +7,10 @@ package Database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Person {
     public String name;
@@ -19,6 +22,20 @@ public class Person {
         this.email = email;
         this.ph_no = ph_no;
         System.out.println("HELLO");
+        
+        
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPh_no() {
+        return ph_no;
     }
     
     public void insertPerson(Connection con) throws SQLException{
@@ -33,5 +50,30 @@ public class Person {
         
     }
     
+    
+    
+    public static ObservableList<Person>getAllPerson(Connection con) throws SQLException{
+        ObservableList<Person> personArray = FXCollections.observableArrayList();
+        
+        String sql = "select * from person;";
+        
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        while(rs.next()){
+            
+            String name = rs.getString(2);
+            String email =rs.getString(3);
+            String ph_no =rs.getString(4);
+            Person p = new Person(name,email,ph_no);
+            
+            personArray.add(p);
+            
+            
+        }
+        rs.close();
+        ps.close();
+        return personArray;
+
+    }
 }
 

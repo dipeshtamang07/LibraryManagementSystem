@@ -7,16 +7,23 @@ package GUI;
 
 import Database.Database;
 import Database.Person;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 
 /**
  *
@@ -36,8 +43,10 @@ public class PersonForm1 {
     Button btnPerson;
 
     GridPane gp2;
+    
+    HBox hbox1; 
 
-    public PersonForm1() {
+    public PersonForm1() throws ClassNotFoundException, SQLException {
 
         lPTitle = new Label("ADD PERSON");
         lPName = new Label("name");
@@ -68,6 +77,28 @@ public class PersonForm1 {
         gp2.add(tfph_no, 1, 3);
 
         gp2.add(btnPerson, 1, 5);
+        
+        //Tableview
+        TableView t = new TableView();
+        Database d2 = new Database();
+        Connection con = d2.openConnection();
+        ObservableList<Person> personArray = Person.getAllPerson(con);
+        
+        TableColumn <String,Person> tname = new TableColumn("Name");
+        tname.setCellValueFactory(new PropertyValueFactory("name"));
+        
+        TableColumn <String,Person> temail = new TableColumn("Email");
+        temail.setCellValueFactory(new PropertyValueFactory("Email"));
+        
+        TableColumn <String,Person> tph_no = new TableColumn("Ph_no");
+        tph_no.setCellValueFactory(new PropertyValueFactory("Ph_no"));
+        
+        
+        t.setItems(personArray);
+        t.getColumns().addAll(tname,temail,tph_no);
+        
+        
+        hbox1 = new HBox(gp2,t);
 
         btnPerson.setOnAction((ActionEvent event) -> {
             String name = tfPName.getText();
@@ -86,7 +117,7 @@ public class PersonForm1 {
             System.out.println(ph_no);
 
             Database d = new Database();
-            Person b = new Person(name, email, ph_no);
+            Person b = new Person(name, ph_no,email);
             try {
                 b.insertPerson(d.openConnection());
             } catch (ClassNotFoundException | SQLException ex) {
@@ -136,5 +167,10 @@ public class PersonForm1 {
     public GridPane getGp2() {
         return gp2;
     }
+
+    public HBox getHbox1() {
+        return hbox1;
+    }
+    
 
 }

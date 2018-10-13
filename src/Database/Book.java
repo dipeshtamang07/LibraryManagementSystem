@@ -3,6 +3,7 @@ package Database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
@@ -31,6 +32,21 @@ public class Book {
         ps.setString(4, this.pubG);
         ps.executeUpdate();
         ps.close();           
+        
+    }
+    
+    public void DisplayBook(Connection con ) throws SQLException{
+        String sql = "select * from book;";
+        
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        while(rs.next()){
+            System.out.println(rs.getString(1));
+            System.out.println(rs.getString(2));
+            System.out.println(rs.getString(3));
+            System.out.println(rs.getString(4));
+            
+        }
         
     }
     

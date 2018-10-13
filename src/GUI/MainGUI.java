@@ -5,11 +5,13 @@ package GUI;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import java.sql.SQLException;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class MainGUI extends Application {
@@ -19,7 +21,7 @@ public class MainGUI extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws ClassNotFoundException, SQLException {
 
         //FORMS
         BookForm1 bookForm = new BookForm1();
@@ -43,24 +45,22 @@ public class MainGUI extends Application {
 
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 
-        //GridPanes
-        GridPane bookGP = bookForm.getGp1();
-        GridPane personGP = personForm.getGp2();
-        GridPane borrowGP = borrowForm.getGp3();
-        GridPane returnGP = returnForm.getGp4();
+        HBox hbox1 = personForm.getHbox1();
+        
+        HBox hbox4 = returnForm.getHbox4();
 
         //Tab Contents
-        tab1.setContent(bookGP);
-        tab2.setContent(personGP);
-        tab3.setContent(borrowGP);
-        tab4.setContent(returnGP);
+        tab1.setContent(hbox1);
+        //tab2.setContent(personGP);
+        //tab3.setContent(borrowGP);
+        tab4.setContent(hbox4);
 
         tabPane.getTabs().add(tab1);
         tabPane.getTabs().add(tab2);
         tabPane.getTabs().add(tab3);
         tabPane.getTabs().add(tab4);
 
-        Scene scene = new Scene(tabPane, 500, 300);
+        Scene scene = new Scene(tabPane, 600, 300);
 
         primaryStage.setTitle("LIBRARY");
         primaryStage.setScene(scene);

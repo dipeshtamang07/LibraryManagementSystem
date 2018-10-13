@@ -2,17 +2,24 @@ package GUI;
 
 import Database.BorrowBook;
 import Database.Database;
+import Database.Person;
 import Database.ReturnBook;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 
 /**
  *
@@ -46,11 +53,19 @@ public class ReturnForm {
         return gp4;
     }
 
+    public HBox getHbox4() {
+        return hbox4;
+    }
+    
+    
+
     Button btnReturn;
 
     GridPane gp4;
+    
+    HBox hbox4; 
 
-    public ReturnForm() {
+    public ReturnForm() throws ClassNotFoundException, SQLException {
 
         lTitle = new Label("ADD RETURN");
         lBoId = new Label("Borrow ID");
@@ -68,6 +83,27 @@ public class ReturnForm {
         gp4.add(lBoId, 0, 1);
         gp4.add(tfBoId, 1, 1);
         gp4.add(btnReturn, 1, 2);
+        
+        
+        //Tableview
+        TableView t = new TableView();
+        Database d2 = new Database();
+        Connection con = d2.openConnection();
+        ObservableList<ReturnBook> returnBookArray = ReturnBook.getAllReturnBooks(con);
+        
+        TableColumn <Integer,ReturnBook> tbo_id = new TableColumn("Book-ID");
+        tbo_id.setCellValueFactory(new PropertyValueFactory("Book-ID"));
+        
+        
+        t.setItems(returnBookArray);
+        t.getColumns().addAll(tbo_id);
+        
+        
+        hbox4 = new HBox(gp4,t);
+        
+        
+        
+        
         btnReturn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
